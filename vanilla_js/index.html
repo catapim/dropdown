@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>select regiones y comunas</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+
+
+    Regiones:
+    <select onchange="onSelectChange()" id="select_regiones">
+       
+    </select>
+
+    Comunas:
+    <select id="select_comunas">
+    
+    </select>
+ 
+
+    <!-- Comunas: -->
+    <script>
+        var regiones_y_comunas = [
+                                {
+                                "nombre": "Arica y Parinacota",
+                                "comunas": ["Arica", "Camarones", "Putre", "General Lagos"]
+                                },
+                                {
+                                "nombre": "Tarapacá",
+                                "comunas": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"]
+                                },
+                                {
+                                "nombre": "Antofagasta",
+                                "comunas": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "Tocopilla", "María Elena"]
+                                },
+                                {
+                                "nombre": "Atacama",
+                                "comunas": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"]
+                                },
+                                {
+                                "nombre": "Coquimbo",
+                                "comunas": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"]
+                                },
+                                {
+                                "nombre": "Valparaíso",
+                                "comunas": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"]
+                                }
+        ]
+      
+        // funcion que muestra regiones y que llena el primer select (regiones)
+        function populate_select(arr) {
+            var out = "";
+            var i;
+            for(i = 0; i < arr.length; i++) {
+                out += '<option value="' + arr[i].nombre + '">' + arr[i].nombre + '</option>';
+            }
+            document.getElementById("select_regiones").innerHTML = out;
+        } 
+        // se inicializa la funcion populate_select y se le pasa el array de regiones_comunas como parametro        
+        populate_select(regiones_y_comunas)
+        
+        var select_element=document.getElementById("select_regiones");
+        var region_index=0
+
+        // funcion que muestra las comunas de la region elegida y que tiene el segundo select (comunas)
+        function onSelectChange() {
+            out=""
+            // toma el valor del indice del elemento de array elegido
+            region_index=select_element.selectedIndex            
+            // imprime en la consola el index del array de REGIONES por ejemplo arica y parinacota seria region_index=0
+            // console.log(select_element.options[region_index].value);
+            var i;
+            // itera sobre la lista de comunas segun el indice de la primera eleccion (region)
+            for (i = 0; i < regiones_y_comunas[region_index].comunas.length; i++) {
+                out += '<option value="' + regiones_y_comunas[region_index].comunas[i] + '">' + regiones_y_comunas[region_index].comunas[i] + '</option>';
+
+            }
+            document.getElementById("select_comunas").innerHTML = out
+        }
+    </script>
+
+</body>
+</html>
