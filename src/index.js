@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+let region_seleccionada = 0
+
 const regiones_y_comunas = [
     {
     "nombre": "Arica y Parinacota",
@@ -27,25 +29,44 @@ const regiones_y_comunas = [
     }
 ]
 
+
 class RegionSelector extends Component
 {
     constructor(props) {
         super(props);
         console.log(regiones_y_comunas);     
+        this.state={
+            region_seleccionada:0
+        }
+        this.onRegionSelect=this.onRegionSelect.bind(this);
+    }
+
+    onRegionSelect(e) {
+        const selection = e.target.value;
+        console.log('selection: ', selection)
+        this.setState({region_seleccionada:e.target.value})
+        return selection
     }
 
     render() {
-
+        let i = -1
         return(
             <div>
-                <select>
+                <h2>Regiones</h2>
+                <select onChange={this.onRegionSelect} value={this.state.region_seleccionada}>
                 {regiones_y_comunas.map((region)=>{
-                    return(<option key={region.nombre}>{region.nombre}</option>)
+                    i++      
+                    return(<option key={region.nombre} value={i}>{region.nombre}</option>)                    
                 })}
-                </select>
+                </select> 
+                <h2>Comunas</h2>
+                <select>
+                {regiones_y_comunas.map((region,comunas)=>{
+                    return(<option key={region.comunas}>{region.comunas}</option>)                    
+                })}
+                </select>         
             </div>
-        )        
-    }
+        )}
 }
 export default RegionSelector;
 ReactDOM.render(<RegionSelector />, document.getElementById('select_regiones'));
