@@ -1,16 +1,13 @@
- const path = require('path');
- module.exports = {
-    // define entry file and output
-    entry: './src/index.js',
-    output: {
-        path: path.resolve('dist'),
-        filename: 'main.js'
-    },
-    // define babel loader
+module.exports = {
     module: {
-        rules: [
-            { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ }
-        ]
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader"
+          }
+        }
+      ]
     }
- };
-
+  };
